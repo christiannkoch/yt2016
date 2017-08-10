@@ -54,7 +54,7 @@ The jobs collection was used in the pre-collection phase of the video metadata c
   This was used internaly
 
 ### yt-metadata
-Once enough jobs were generated and processed, the collection-phase was initiated. In this phase, for each prefix in the job collection for which at least a single video could be found (status 0), a random video ID was selected from the list of search results. For these videos (1,043,429), static and dynamic metadata was crawled once in the beginning and the dynamic metadata was observed over a period of 50 days on a daily basis. For this task, the YouTube API was used.
+Once enough jobs were generated and processed, the collection-phase was initiated. In this phase, for each prefix in the job collection for which at least a single video could be found (status 0), a random video ID was selected from the list of search results. For these videos (1,043,429), the metadata was observed over a period of 50 days on a daily basis. For this task, the YouTube API was used.
 
 **Example document:**
 - `"videoid" : "yoftU-xA4Fw"`<br>
@@ -67,7 +67,7 @@ Once enough jobs were generated and processed, the collection-phase was initiate
   - Status **10**: PENDING. This status was used by the scheduler to indicate that the last processing time of the video was ~24 hours ago and the worker needs to recrawl the statistics of this video.
   - Status **20**: NOT FOUND. The YouTube API did not replied with any metadata for this video. Once in this status, the worker did not tried any further attempts to collect metadata for this video.
 - `"results" : [ { "contentDetails" : { "duration" : "PT42S", "dimension" : "2d", "definition" : "hd", "caption" : "false", "licensedContent" : "0", "projection" : "rectangular" }, "id" : "yoftU-xA4Fw", "snippet" : { "publishedAt" : "2015-08-26T23:00:56.000Z", "channelId" : "UCJ6u6QrV4O4aJP7JYF19ejw", "title" : "Rew. Orange Circles (Real)", "channelTitle" : "HappierChunk7", "categoryId" : "20", "liveBroadcastContent" : "none" }, "statistics" : { "viewCount" : "10", "likeCount" : "1", "dislikeCount" : "0", "favoriteCount" : "0", "commentCount" : "0" }, "status" : { "uploadStatus" : "processed", "privacyStatus" : "public", "license" : "youtube", "embeddable" : "1", "publicStatsViewable" : "1" }, "inserted_at" : 1482086167 }, ... ]`<br>
-  This contains the reported data from the YouTube API. For the first crawl crawl, both static and dynamic video metadata was captured. For successive crawls only the dynamic (= statistics) video metadata was crawled.
+  This contains the reported data from the YouTube API. For the first crawl, both static and dynamic video metadata was captured. For successive crawls only the dynamic (= statistics) video metadata was crawled.
 - `"updated_at" : 1486318262`<br>
   The last time this document was updated
 - `"created_at" : 1481217193`<br>
