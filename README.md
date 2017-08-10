@@ -9,7 +9,7 @@
     - [yt-metadata](#yt-metadata)
 
 ## Introduction
-This repository holds a MongoDB dump consisting of the metadata of ~1,000,000 YouTube videos. The dataset was collected by issuing random search queries of the following form to YouTube: `inurl:"watch?v=[A-Z]{5}`. The collection process was conducted during November and December 2016.
+This repository holds a MongoDB dump consisting of the metadata of ~1,000,000 YouTube videos. The collection process was conducted during November and December 2016.
 
 ## Using the dump
 There are two possibilities to use the dump
@@ -33,7 +33,7 @@ The database consists of two important collections:
 - yt-metadata
 
 ### jobs
-The jobs collection was used in the pre-collection-phase of the video metadata. In this phase, random video ID prefixes consisting of 5 characters (`[a-z]{5}`) were generated and saved as a "job". These jobs were processed by a worker who used the YouTube search engine to submit queries in the form `inurl:"watch?v=[A-Z]{5}`. The results of these queries were appended to the job.
+The jobs collection was used in the pre-collection phase of the video metadata collection process. In this phase, random video ID prefixes consisting of 5 characters (`[a-z]{5}`) were generated and saved as a "job". These jobs were processed by a worker who used the YouTube search engine to submit queries in the form `inurl:"watch?v=[A-Z]{5}`. The results of these queries were then attached to the job.
 
 **Example document:**
 - `"prefix" : "wxmdw"`<br>
@@ -54,8 +54,7 @@ The jobs collection was used in the pre-collection-phase of the video metadata. 
   This was used internaly
 
 ### yt-metadata
-Once enough jobs were generated and processed, the collection-phase was initiated. In this phase, for each prefix in the job collection for which at least a single video could be found (status 0), a random video ID was selected from the list of search results.
-For these videos (1,043,429), the metadata were crawled once and statistics of were observed throughout a period of 50 days on a daily basis. For this task, the YouTube API was used.
+Once enough jobs were generated and processed, the collection-phase was initiated. In this phase, for each prefix in the job collection for which at least a single video could be found (status 0), a random video ID was selected from the list of search results. For these videos (1,043,429), static and dynamic metadata was crawled once in the beginning and the dynamic metadata was observed over a period of 50 days on a daily basis. For this task, the YouTube API was used.
 
 **Example document:**
 - `"videoid" : "yoftU-xA4Fw"`<br>
